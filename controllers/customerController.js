@@ -32,4 +32,14 @@ const getAllCustomers = async (req, res) => {
   }
 };
 
-module.exports = { addCustomer, getAllCustomers };
+// Fetch a customer by ID
+const getCustomerById = async (req, res) => {
+  try {
+    const customer = await Customer.findById(req.params.id);
+    if (!customer) return res.status(404).json({ message: "Customer not found" });
+    res.json(customer);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+module.exports = { addCustomer, getAllCustomers, getCustomerById };
