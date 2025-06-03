@@ -22,4 +22,14 @@ const addCustomer = async (req, res) => {
   }
 };
 
-module.exports = { addCustomer };
+// Fetch all customers
+const getAllCustomers = async (req, res) => {
+  try {
+    const customers = await Customer.find();
+    res.json(customers);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { addCustomer, getAllCustomers };

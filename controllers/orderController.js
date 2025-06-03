@@ -16,4 +16,14 @@ const addOrder = async (req, res) => {
   }
 };
 
-module.exports = { addOrder };
+// Fetch all orders
+const getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find().populate('customer', 'name email');
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { addOrder, getAllOrders };
